@@ -1,6 +1,6 @@
 # 不包含 JSX 的 React
 
-对于 React 来说，JSX 并不是必须的。如果不想在构建环境中支持编译，使用不包含 JSX 的 React 是非常方便的。
+对于 React 来说，JSX 并不是必须的。如果不想在构建环境中设置编译（流程），使用不包含 JSX 的 React 是非常方便的。
 
 每个 JSX 元素都只是调用 `React.createElement(component, props, ...children)` 方法的语法糖。所以，任何 JSX 能做的事纯 JavaScript 也能做。
 
@@ -11,6 +11,7 @@ class Hello extends React.Component {
     return <div>Hello {this.props.toWhat}</div>;
   }
 }
+
 ReactDOM.render(
   <Hello toWhat="World" />,
   document.getElementById('root')
@@ -24,6 +25,7 @@ class Hello extends React.Component {
     return React.createElement('div', null, `Hello ${this.props.toWhat}`);
   }
 }
+
 ReactDOM.render(
   React.createElement(Hello, {toWhat: 'World'}, null),
   document.getElementById('root')
@@ -32,12 +34,13 @@ ReactDOM.render(
 
 如果很好奇想要看到更多 JSX 如何编译成 JavaScript 的例子，可以试试 [Babel 在线编译器]。
 
-组件可以是：一个字符串、一个 `React.Component` 的子类、一个作为无状态组件的普通函数。
+组件（第一个参数 component ）可以是：一个字符串、一个 `React.Component` 的子类、一个作为无状态组件的普通函数。
 
-如果觉得写太多 `React.createElement` 很累，一个通用的模式是使用缩写：
+如果觉得写太多 `React.createElement` 很累，一个通用的模式是赋值给一个简写（的变量）：
 
 ```js
 const e = React.createElement;
+
 ReactDOM.render(
   e('div', null, 'Hello World'),
   document.getElementById('root')
